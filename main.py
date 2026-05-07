@@ -1,5 +1,6 @@
 import pygame
 import sys
+import asyncio
 from settings import *
 
 def map_mouse_pos(pos, current_w, current_h):
@@ -13,7 +14,7 @@ def map_mouse_pos(pos, current_w, current_h):
     internal_y = (pos[1] - y_offset) / ratio
     return (int(internal_x), int(internal_y))
 
-def main():
+async def main():
     pygame.init()
     screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.RESIZABLE)
     pygame.display.set_caption("Dark Hangman")
@@ -59,9 +60,10 @@ def main():
         screen.blit(scaled_surface, (x_offset, y_offset))
         
         pygame.display.flip()
+        await asyncio.sleep(0)
         
     pygame.quit()
     sys.exit()
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
